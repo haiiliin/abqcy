@@ -30,7 +30,6 @@ dependencies = [
     "abqpy",
     "cython",
     "fire",
-    "pyccel",
     "python-dotenv",
 ]
 
@@ -38,7 +37,6 @@ dependencies = [
 dev = [
     "black",
     "coverage",
-    "cython",
     "isort",
     "pre-commit",
     "pytest",
