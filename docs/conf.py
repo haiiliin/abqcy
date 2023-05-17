@@ -6,8 +6,9 @@ from __future__ import annotations
 
 import inspect
 import os
-import re
 import sys
+
+import abqcy
 
 # -- Project information -----------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
@@ -15,7 +16,7 @@ import sys
 project = "abqcy"
 copyright = "2023, WANG Hailin"
 author = "WANG Hailin"
-release = "0.0.1"
+release = version = abqcy.__version__
 
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
