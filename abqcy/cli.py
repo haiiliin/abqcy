@@ -97,7 +97,8 @@ class AbqcyCLI:
         input : str
             The path to the input file.
         user : str
-            The name of the user subroutine.
+            The name of the user subroutine, if it is a Cython/Pure Python script, it will be compiled
+            to an object file automatically.
         job : str, optional
             The name of the job, by default the current directory name.
         output : str, optional
