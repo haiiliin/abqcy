@@ -61,7 +61,7 @@ docs = [
 "GitHub" = "https://github.com/haiiliin/abqcy/"
 "PyPI" = "https://pypi.org/project/abqcy/"
 "Read the Docs" = "https://readthedocs.org/projects/abqcy"
-"Documentation" = "https://docs.abqcy.com/en/stable/"
+"Documentation" = "https://docs.abqcy.com/"
 "Bug Report" = "https://github.com/haiiliin/abqcy/issues/"
 
 [project.scripts]
