@@ -25,7 +25,7 @@ class AbqcyCLI:
         compiled.write_text(replaced)
         abaqus.abaqus("make", library=str(compiled))
 
-    def run(self, input: str, user: str, job: str = None, wd: str = None, script: str = None, **kwargs):
+    def run(self, input: str, user: str, job: str = None, output: str = None, script: str = None, **kwargs):
         """Run Abaqus jobs.
 
         Parameters
@@ -36,29 +36,29 @@ class AbqcyCLI:
             The name of the user subroutine.
         job : str, optional
             The name of the job, by default the current directory name.
-        wd : str, optional
-            The working directory, by default the directory of the input file.
+        output : str, optional
+            The path to the output directory, by default the current directory.
         script : str, optional
             The Python script to run after finishing the job to post-process the results.
         """
         # Prepare the working directory
-        wd = Path(wd or ".").resolve()
+        output = Path(output or ".").resolve()
         job = job or Path(input).stem
-        if not wd.exists():
-            wd.mkdir(parents=True)
-        if not (wd / Path(input).name).exists():
-            shutil.copy(input, wd)
-        if not (wd / Path(user).name).exists():
-            shutil.copy(user, wd)
-        if script and not (wd / Path(script).name).exists():
-            shutil.copy(script, wd)
-        os.chdir(wd)
+        if not output.exists():
+            output.mkdir(parents=True)
+        if not (output / Path(input).name).exists():
+            shutil.copy(input, output)
+        if not (output / Path(user).name).exists():
+            shutil.copy(user, output)
+        if script and not (output / Path(script).name).exists():
+            shutil.copy(script, output)
+        os.chdir(output)
 
         # Compile the user subroutine if it is a Cython/Pure Python script
         if user.endswith((".pyx", ".py")):
             self.compile(Path(user).name)
             compiled = False
-            for file in wd.glob(f"{Path(user).stem}-*.obj"):
+            for file in output.glob(f"{Path(user).stem}-*.obj"):
                 user = file
                 compiled = True
                 break
