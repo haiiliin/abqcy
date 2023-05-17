@@ -53,7 +53,7 @@ After you have written your subroutine, you can compile it with the `abqcy` comm
 ```shell
 abqcy compile <path-to-your-subroutine>
 ```
-This will compile your subroutine into a `.c` file and a `.h` file, and then thye will be compiled into a `.obj` file
+This will compile your subroutine into a `.c` file and a `.h` file, and then they will be compiled into a `.obj` file
 that can be used by Abaqus. These files are in the same directory as your subroutine.
 
 Now you can use the subroutine in Abaqus, like:
