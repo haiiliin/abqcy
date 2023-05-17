@@ -58,8 +58,8 @@ docs = [
 [project.scripts]
 abqcy = "abqcy.__main__:main"
 
-[tool.setuptools.packages.find]
-where = ["abqcy"]
+[tool.setuptools]
+packages = ["abqcy"]
 
 [tool.setuptools_scm]
 root = "."
