@@ -36,6 +36,7 @@ dependencies = [
 dev = [
     "black",
     "coverage",
+    "cython",
     "isort",
     "pre-commit",
     "pytest",
@@ -45,8 +46,9 @@ docs = [
     "myst-parser",
     "sphinx",
     "sphinx-autoapi",
+    "sphinx-autodoc-typehints",
     "sphinx-codeautolink",
-     "sphinx-copybutton",
+    "sphinx-copybutton",
     "sphinx-design",
     "sphinx-hoverxref",
     "sphinx-rtd-theme",

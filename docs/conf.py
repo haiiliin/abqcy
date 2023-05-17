@@ -33,6 +33,7 @@ extensions = [
     "sphinx_autodoc_typehints",
     "sphinx_copybutton",
     "sphinx_codeautolink",
+    "sphinx_design",
     "hoverxref.extension",
     "autoapi.extension",
 ]

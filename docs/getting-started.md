@@ -1,0 +1,70 @@
+# Getting Started
+
+`abqcy` allows you to write your Abaqus subroutines in [Cython](https://cython.org/).
+It provides a command line tool to compile your Cython code into an object (`.obj`) file that can be used by Abaqus.
+
+## Installation
+
+You can install `abqcy` with `pip` or from source:
+```{eval-rst}
+.. tab-set::
+
+    .. tab-item:: Install with pip
+
+        .. code-block:: shell
+
+            pip install abqcy
+
+    .. tab-item:: Install from source
+
+        .. code-block:: shell
+
+            pip install git+https://github.com/haiiliin/abqcy
+```
+
+## Environment Setup
+
+`abqyc` requires a working Abaqus installation with user subroutines enabled.
+Make sure the `abaqus` command is available in the command line, otherwise you need to create a new system environment
+variable `ABAQUS_BAT_PATH` and set it to the path of the `abaqus.bat` file.
+
+`abqcy` uses [Cython](https://cython.org/) to compile your Cython code into a `C` file.
+In order to compile the `C` file into an object (`.obj`) file that can be used by Abaqus, the `abaqus make` command
+is used (it uses the `cl` compiler from Visual Studio). Since the compiled `C` file requires the Python headers and
+libraries, you need to make sure that the `cl` compiler can find them. This can be done by setting the `INCLUDE` and
+`LIB` environment variables to the Python include and library directories respectively. If you do not want to set
+global environment variables, you can also create a `.env` file in the directory where you run the `abqcy` command.
+
+The following is the information of the `INCLUDE`environment variable on my computer, you need to separate
+the paths with `;` on Windows and `:` on Linux:
+```shell
+C:/Users/Hailin/AppData/Local/Programs/Python/Python310/include
+C:/Users/Hailin/AppData/Local/Programs/Python/Python310/Lib/site-packages/numpy/core/include
+C:/Program Files (x86)/Microsoft Visual Studio/2019/BuildTools/VC/Tools/MSVC/14.29.30133/include
+C:/Program Files (x86)/Windows Kits/10/Include/10.0.19041.0/shared
+C:/Program Files (x86)/Windows Kits/10/Include/10.0.19041.0/ucrt
+```
+and the following is the information of the `LIB` environment variable on my computer:
+```shell
+C:/Users/Hailin/AppData/Local/Programs/Python/Python310/libs
+C:/Users/Hailin/AppData/Local/Programs/Python/Python310/Lib/site-packages/numpy/core/lib
+C:/Program Files (x86)/Windows Kits/10/Lib/10.0.19041.0/um/x64
+C:/Program Files (x86)/Windows Kits/10/Lib/10.0.19041.0/ucrt/x64
+```
+
+## Usage
+
+You can now write your Abaqus subroutine in Cython, simple scripts can be found in the
+[abqcy/subroutines](https://github.com/haiiliin/abqcy/tree/main/abqcy/subroutines) directory.
+
+After you have written your subroutine, you can compile it with the `abqcy` command:
+```shell
+abqcy compile <path-to-your-subroutine>
+```
+This will compile your subroutine into a `.c` file and a `.h` file, and then thye will be compiled into a `.obj` file
+that can be used by Abaqus. These files are in the same directory as your subroutine.
+
+Now you can use the subroutine in Abaqus, like:
+```shell
+abaqus job=Job-1 input=model.inp user=your-subroutine.obj
+```
