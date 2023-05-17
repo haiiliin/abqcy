@@ -1,6 +1,6 @@
 # abqcy documentation
 
-Writing Abaqus Subroutines in Cython.
+Write Abaqus Subroutines in Cython.
 
 - GitHub repository: <https://github.com/haiiliin/abqcy>
 - PyPI: <https://pypi.org/project/abqcy>

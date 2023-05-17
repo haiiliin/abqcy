@@ -10,7 +10,7 @@ name = "abqcy"
 authors = [
     { name="WANG Hailin", email="hailin.wang@connect.polyu.hk" },
 ]
-description = "Writing Abaqus Subroutines in Python"
+description = "Write Abaqus Subroutines in Python"
 readme = "README.md"
 dynamic = ["version"]
 requires-python = ">=3.7"
