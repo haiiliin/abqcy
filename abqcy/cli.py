@@ -13,7 +13,7 @@ class AbqcyCLI:
     """The ``abqcy`` command-line interface."""
 
     def compile(
-        self, 
+        self,
         script: str,
         *,
         exclude: list = None,
