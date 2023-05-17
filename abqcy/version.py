@@ -3,7 +3,7 @@ from pathlib import Path
 try:
     from ._version import version as _default_version
 except ImportError:
-    _default_version = "2023.0.0-dev"
+    _default_version = "0.0.0"
 
 
 def _get_version():
