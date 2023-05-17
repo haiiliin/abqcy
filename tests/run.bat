@@ -14,6 +14,6 @@ set job=Job-column-elastic
 if not exist jobs\%job% mkdir jobs\%job%
 echo F|xcopy subs\%sub% jobs\%job%\%sub% /Y
 echo F|xcopy inputs\%inp% jobs\%job%\%inp% /Y
-cd "jobs\%job%"
+cd jobs\%job%
 abaqus job=%job% input=%inp% user=%sub% interactive
 cd ..\..
