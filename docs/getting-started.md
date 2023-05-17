@@ -22,7 +22,7 @@ variable `ABAQUS_BAT_PATH` and set it to the path of the `abaqus.bat` file.
 
 `abqcy` uses [Cython](https://cython.org/) to compile your Cython code into a C source file (`.c`).
 In order to compile the C source file into an object file (`.obj`) that can be used by Abaqus, the `abaqus make` command
-is used (it uses the `cl` compiler from Visual Studio). Since the compiled `C` file requires the Python headers and
+is used (it uses the MSVC `cl` compiler from Visual Studio). Since the compiled `.c` file requires the Python headers and
 libraries, you need to make sure that the `cl` compiler can find them. This can be done by setting the `INCLUDE` and
 `LIB` environment variables. If you do not want to set
 global environment variables, you can also create a `.env` file in the directory where you run the `abqcy` command.
