@@ -1,0 +1,75 @@
+# pyproject.toml, for more information about configuration options, see 
+# https://setuptools.pypa.io/en/stable/userguide/pyproject_config.html
+
+[build-system]
+requires = ["setuptools>=45", "setuptools_scm[toml]>=6.2"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "abqcy"
+authors = [
+    { name="WANG Hailin", email="hailin.wang@connect.polyu.hk" },
+]
+description = "Writing Abaqus Subroutines in Python"
+readme = "README.md"
+dynamic = ["version"]
+requires-python = ">=3.7"
+classifiers = [
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.7",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: Implementation :: PyPy",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+dependencies = [
+    "fire",
+    "pyccel",
+    "python-dotenv",
+]
+
+[project.optional-dependencies]
+dev = [
+    "black",
+    "coverage",
+    "isort",
+    "pre-commit",
+    "pytest",
+    "pytest-cov",
+]
+docs = [
+    "myst-parser",
+    "sphinx",
+    "sphinx-autoapi",
+    "sphinx-codeautolink",
+     "sphinx-copybutton",
+    "sphinx-design",
+    "sphinx-hoverxref",
+    "sphinx-rtd-theme",
+]
+
+[project.urls]
+"GitHub" = "https://github.com/haiiliin/abqcy"
+
+[project.scripts]
+abqcy = "abqcy.__main__:main"
+
+[tool.setuptools.packages.find]
+where = ["abqcy"]
+
+[tool.setuptools_scm]
+root = "."
+version_scheme = "post-release"
+write_to = "abqcy/_version.py"
+fallback_version = "0.0.0"
+
+[tool.black]
+line-length = 120
+target-version = ['py37', 'py38', 'py39', 'py310', 'py311']
+
+[tool.isort]
+profile = "black"
