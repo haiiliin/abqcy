@@ -34,6 +34,7 @@ extensions = [
     "sphinx_copybutton",
     "sphinx_codeautolink",
     "sphinx_design",
+    "sphinxcontrib.programoutput",
     "hoverxref.extension",
     "autoapi.extension",
 ]

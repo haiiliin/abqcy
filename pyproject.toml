@@ -52,6 +52,7 @@ docs = [
     "sphinx-design",
     "sphinx-hoverxref",
     "sphinx-rtd-theme",
+    "sphinxcontrib-programoutput",
 ]
 
 [project.urls]

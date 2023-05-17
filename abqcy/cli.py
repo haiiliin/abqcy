@@ -40,6 +40,8 @@ class AbqcyCLI:
             The path to the output directory, by default the current directory.
         script : str, optional
             The Python script to run after finishing the job to post-process the results.
+        **kwargs
+            Additional keyword arguments to pass to the ``abaqus`` command to make the object file.
         """
         # Prepare the working directory
         output = Path(output or ".").resolve()
