@@ -84,6 +84,7 @@ class AbqcyCLI:
         self,
         input: str,
         user: str,
+        *,
         job: str = None,
         output: str = None,
         script: str = None,
