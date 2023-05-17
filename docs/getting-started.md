@@ -16,7 +16,7 @@ pip install git+https://github.com/haiiliin/abqcy
 
 ## Environment Setup
 
-`abqyc` requires a working Abaqus installation with user subroutines enabled.
+`abqcy` requires a working Abaqus installation with user subroutines enabled.
 Make sure the `abaqus` command is available in the command line, otherwise you need to create a new system environment
 variable `ABAQUS_BAT_PATH` and set it to the path of the `abaqus.bat` file.
 
