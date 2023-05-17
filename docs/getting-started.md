@@ -5,21 +5,13 @@ It provides a command line tool to compile your Cython code into an object (`.ob
 
 ## Installation
 
-You can install `abqcy` with `pip` or from source:
-```{eval-rst}
-.. tab-set::
-
-    .. tab-item:: Install with pip
-
-        .. code-block:: shell
-
-            pip install abqcy
-
-    .. tab-item:: Install from source
-
-        .. code-block:: shell
-
-            pip install git+https://github.com/haiiliin/abqcy
+You can install `abqcy` with `pip`:
+```shell
+pip install abqcy
+```
+or install it from source:
+```shell
+pip install git+https://github.com/haiiliin/abqcy
 ```
 
 ## Environment Setup
@@ -29,10 +21,10 @@ Make sure the `abaqus` command is available in the command line, otherwise you n
 variable `ABAQUS_BAT_PATH` and set it to the path of the `abaqus.bat` file.
 
 `abqcy` uses [Cython](https://cython.org/) to compile your Cython code into a `C` file.
-In order to compile the `C` file into an object (`.obj`) file that can be used by Abaqus, the `abaqus make` command
+In order to compile the `C` file into an object file (`.obj`) that can be used by Abaqus, the `abaqus make` command
 is used (it uses the `cl` compiler from Visual Studio). Since the compiled `C` file requires the Python headers and
 libraries, you need to make sure that the `cl` compiler can find them. This can be done by setting the `INCLUDE` and
-`LIB` environment variables to the Python include and library directories respectively. If you do not want to set
+`LIB` environment variables. If you do not want to set
 global environment variables, you can also create a `.env` file in the directory where you run the `abqcy` command.
 
 The following is the information of the `INCLUDE`environment variable on my computer, you need to separate
