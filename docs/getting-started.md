@@ -47,7 +47,7 @@ C:/Program Files (x86)/Windows Kits/10/Lib/10.0.19041.0/ucrt/x64
 ## Usage
 
 You can now write your Abaqus subroutine in Cython, simple scripts can be found in the
-[abqcy/subroutines](https://github.com/haiiliin/abqcy/tree/main/abqcy/subroutines) directory.
+[examples](https://github.com/haiiliin/abqcy/tree/main/examples) directory.
 
 After you have written your subroutine, you can compile it with the `abqcy` command:
 ```shell
