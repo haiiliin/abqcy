@@ -27,6 +27,8 @@ classifiers = [
     "Operating System :: OS Independent",
 ]
 dependencies = [
+    "abqpy",
+    "cython",
     "fire",
     "pyccel",
     "python-dotenv",

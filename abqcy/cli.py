@@ -6,20 +6,25 @@ import shutil
 from pathlib import Path
 
 from abqpy.cli import abaqus
+from Cython.Build import cythonize
 
 
 class AbqcyCLI:
     """The ``abqcy`` command-line interface."""
 
-    def compile(self, script: str):
+    def compile(self, script: str, *, annotate: bool = True, **kwargs):
         """Compile a Cython script to an Abaqus user subroutine as an object file.
 
         Parameters
         ----------
         script : str
             The path to the Cython script to compile.
+        annotate : bool, optional
+            Whether to generate an HTML file with annotations, by default True.
+        **kwargs
+            Additional keyword arguments to pass to the ``cythonize`` command.
         """
-        os.system(f"cython -a {script}")
+        cythonize(script, annotate=annotate, **kwargs)
         compiled = Path(script).with_suffix(".c")
         replaced = re.sub("__PYX_EXTERN_C void ", 'extern "C" void ', compiled.read_text())
         compiled.write_text(replaced)
