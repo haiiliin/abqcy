@@ -70,7 +70,7 @@ class AbqcyCLI:
             be used without compilation.
         annotate : bool, optional
             Whether to generate an HTML file with annotations, by default True.
-        **kwargs
+        kwargs
             Additional keyword arguments to pass to the ``cythonize`` function.
         """
         cythonize(script, exclude=exclude, nthreads=nthreads, aliases=aliases, quiet=quiet, force=force,
@@ -103,7 +103,7 @@ class AbqcyCLI:
             The path to the output directory, by default the current directory.
         script : str, optional
             The Python script to run after finishing the job to post-process the results.
-        **kwargs
+        kwargs
             Additional keyword arguments to pass to the ``abaqus`` command to make the object file.
         """
         # Prepare the working directory
