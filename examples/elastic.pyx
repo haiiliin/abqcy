@@ -16,7 +16,6 @@ cdef public void umat(
     noel: cython.p_int, npt: cython.p_int, layer: cython.p_int, kspt: cython.p_int, jstep: cython.p_int,
     kinc: cython.p_int,
 ):
-    # Define based variables
     cdef double E, nu, lam, G
     E, nu = props[0], props[1]
     lam = E * nu / ((1.0 + nu) * (1.0 - 2.0 * nu))
