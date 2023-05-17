@@ -56,6 +56,8 @@ docs = [
 
 [project.urls]
 "GitHub" = "https://github.com/haiiliin/abqcy"
+"Read the Docs" = "https://readthedocs.org/projects/abqcy"
+"Documentation" = "https://docs.abqcy.com/en/stable/"
 
 [project.scripts]
 abqcy = "abqcy.__main__:main"
