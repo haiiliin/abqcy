@@ -2,7 +2,7 @@
 # https://setuptools.pypa.io/en/stable/userguide/pyproject_config.html
 
 [build-system]
-requires = ["setuptools>=45", "setuptools_scm[toml]>=6.2", "cython"]
+requires = ["setuptools>=45", "setuptools_scm[toml]>=6.2"]
 build-backend = "setuptools.build_meta"
 
 [project]
