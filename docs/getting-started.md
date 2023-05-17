@@ -1,7 +1,7 @@
 # Getting Started
 
 `abqcy` allows you to write your Abaqus subroutines in [Cython](https://cython.org/).
-It provides a command line tool to compile your Cython code into an object (`.obj`) file that can be used by Abaqus.
+It provides a command line tool to compile your Cython code into an object file (`.obj`) that can be used by Abaqus.
 
 ## Installation
 
@@ -20,8 +20,8 @@ pip install git+https://github.com/haiiliin/abqcy
 Make sure the `abaqus` command is available in the command line, otherwise you need to create a new system environment
 variable `ABAQUS_BAT_PATH` and set it to the path of the `abaqus.bat` file.
 
-`abqcy` uses [Cython](https://cython.org/) to compile your Cython code into a `C` file.
-In order to compile the `C` file into an object file (`.obj`) that can be used by Abaqus, the `abaqus make` command
+`abqcy` uses [Cython](https://cython.org/) to compile your Cython code into a C source file (`.c`).
+In order to compile the C source file into an object file (`.obj`) that can be used by Abaqus, the `abaqus make` command
 is used (it uses the `cl` compiler from Visual Studio). Since the compiled `C` file requires the Python headers and
 libraries, you need to make sure that the `cl` compiler can find them. This can be done by setting the `INCLUDE` and
 `LIB` environment variables. If you do not want to set
@@ -53,7 +53,7 @@ After you have written your subroutine, you can compile it with the `abqcy` comm
 ```shell
 abqcy compile <path-to-your-subroutine>
 ```
-This will compile your subroutine into a `.c` file and a `.h` file, and then they will be compiled into a `.obj` file
+This will compile your subroutine into a C source file (`.c`) and a C header file (`.h`), and then they will be compiled into an object file (`.obj`)
 that can be used by Abaqus. These files are in the same directory as your subroutine.
 
 Now you can use the subroutine in Abaqus, like:
