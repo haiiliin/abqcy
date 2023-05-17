@@ -46,7 +46,7 @@ myst_enable_extensions = [
 
 # AutoAPI configuration
 autoapi_dirs = ["../abqcy"]
-autoapi_ignore = ["*_version.py"]
+autoapi_ignore = ["*_version.py", "*__main__.py"]
 autoapi_options = [
     "members",
     "undoc-members",
