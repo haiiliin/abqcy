@@ -140,3 +140,6 @@ class AbqcyCLI:
         if script:
             script = Path(script).name
             abaqus.cae(script, gui=False)
+
+
+abqcy = AbqcyCLI()
