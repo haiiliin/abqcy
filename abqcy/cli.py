@@ -143,9 +143,10 @@ class AbqcyCLI:
             The path to the input file or a Python script to create the input file.
         user : str
             The name of the user subroutine, if it is a Cython/Pure Python script, it will be compiled
-            to an object file automatically. If a companion ``.pxd`` file is found, it will be copied.
+            to an object file automatically. If a companion ``.pxd`` file is found, it will be copied to
+            the output directory along with the Cython/Pure Python script.
         job : str, optional
-            The name of the job, by default the current directory name.
+            The name of the job, by default the model name without the extension.
         output : str, optional
             The path to the output directory, by default the current directory.
         post : str, optional
