@@ -5,7 +5,7 @@ from matplotlib import pyplot as plt
 
 @pytest.mark.parametrize(
     argnames="data_path, xcol, ycol, xlabel, ylabel",
-    argvalues=[("outputs/elastic/U3.csv", "time", "U3", "Time (s)", "Displacement (m)")],
+    argvalues=[("outputs/element/elastic/U3.csv", "time", "U3", "Time (s)", "Displacement (m)")],
     ids=["elastic"],
 )
 @pytest.mark.mpl_image_compare
