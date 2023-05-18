@@ -22,27 +22,10 @@ variable `ABAQUS_BAT_PATH` and set it to the path of the `abaqus.bat` file.
 
 `abqcy` uses [Cython](https://cython.org/) to compile your Cython code into a C source file (`.c`).
 In order to compile the C source file into an object file (`.obj`) that can be used by Abaqus, the `abaqus make` command
-is used (it uses the MSVC `cl` compiler from Visual Studio). Since the compiled `.c` file requires the Python headers and
-libraries, you need to make sure that the `cl` compiler can find them. This can be done by setting the `INCLUDE` and
-`LIB` environment variables. If you do not want to set
-global environment variables, you can also create a `.env` file in the directory where you run the `abqcy` command.
-
-The following is the information of the `INCLUDE` environment variable on my computer, you need to separate
-the paths with `;` on Windows and `:` on Linux:
-```shell
-C:/Users/Hailin/AppData/Local/Programs/Python/Python310/include
-C:/Users/Hailin/AppData/Local/Programs/Python/Python310/Lib/site-packages/numpy/core/include
-C:/Program Files (x86)/Microsoft Visual Studio/2019/BuildTools/VC/Tools/MSVC/14.29.30133/include
-C:/Program Files (x86)/Windows Kits/10/Include/10.0.19041.0/shared
-C:/Program Files (x86)/Windows Kits/10/Include/10.0.19041.0/ucrt
-```
-and the following is the information of the `LIB` environment variable on my computer:
-```shell
-C:/Users/Hailin/AppData/Local/Programs/Python/Python310/libs
-C:/Users/Hailin/AppData/Local/Programs/Python/Python310/Lib/site-packages/numpy/core/lib
-C:/Program Files (x86)/Windows Kits/10/Lib/10.0.19041.0/um/x64
-C:/Program Files (x86)/Windows Kits/10/Lib/10.0.19041.0/ucrt/x64
-```
+is used (it uses the MSVC `cl` compiler).
+Since the compiled `.c` file requires the Python headers and libraries, `abqcy` will try to find them automatically and
+update the `INCLUDE` and `LIB` environment variables.
+If it fails to find them, you need to update the `INCLUDE` and `LIB` environment variables manually.
 
 ## Usage
 
