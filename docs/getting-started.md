@@ -27,7 +27,7 @@ libraries, you need to make sure that the `cl` compiler can find them. This can 
 `LIB` environment variables. If you do not want to set
 global environment variables, you can also create a `.env` file in the directory where you run the `abqcy` command.
 
-The following is the information of the `INCLUDE`environment variable on my computer, you need to separate
+The following is the information of the `INCLUDE` environment variable on my computer, you need to separate
 the paths with `;` on Windows and `:` on Linux:
 ```shell
 C:/Users/Hailin/AppData/Local/Programs/Python/Python310/include
