@@ -2,7 +2,7 @@ cdef extern from "<aba_for_c.h>":
     pass
 
 
-cdef public void umat(
+cdef extern void umat(
     double *stress, double *statev, double *ddsdde, double *sse, double *spd, double *scd,
     double *rpl, double *ddsddt, double *drplde, double *drpldt, double *stran, double *dstran,
     double *time, double *dtime, double *temp, double *dtemp, double *predef, double *dpred,
