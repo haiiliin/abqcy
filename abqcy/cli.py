@@ -127,8 +127,8 @@ class AbqcyCLI:
     def run(
         self,
         model: str,
-        user: str,
         *,
+        user: str = None,
         job: str = None,
         output: str = None,
         post: str = None,
@@ -162,7 +162,7 @@ class AbqcyCLI:
         owd = Path.cwd()
         output = Path(output or ".").resolve()
         job = job or Path(model).stem
-        user_pxd = Path(user).with_suffix(".pxd")
+        user_pxd = Path(user).with_suffix(".pxd") if user else None
 
         # Create the output directory and copy the files
         if not output.exists():
@@ -183,7 +183,7 @@ class AbqcyCLI:
             assert created, f"Failed to create model from {model}."
 
         # Compile the user subroutine if it is a Cython/Pure Python script
-        if user.endswith((".pyx", ".py")):
+        if user and user.endswith((".pyx", ".py")):
             self.compile(Path(user).name)
             compiled = False
             for file in output.glob(f"{Path(user).stem}-*.obj"):
@@ -193,7 +193,7 @@ class AbqcyCLI:
             assert compiled, f"Failed to compile {user} to an object file."
 
         # Run the job
-        inp, user = Path(model).stem, Path(user).stem
+        inp, user = Path(model).stem, Path(user).stem if user else None
         abaqus.abaqus("", job=job, input=inp, user=user, interactive=True, **kwargs)
 
         # Run the post-processing script

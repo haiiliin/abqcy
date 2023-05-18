@@ -58,7 +58,7 @@ abaqus job=Job-1 input=<model.inp> user=<subroutine>
 You can use the `abqcy run` command to run an Abaqus job with your subroutine, post-process the results and visualize
 them in a single command:
 ```shell
-abqcy run <script-or-inp> <subroutine> --job=<job-name> --output=<output-dir> --post=<post-process-script> --visualization=<visualization-script>
+abqcy run <script-or-inp> --user=<subroutine> --job=<job-name> --output=<output-dir> --post=<post-process-script> --visualization=<visualization-script>
 ```
 where:
 
