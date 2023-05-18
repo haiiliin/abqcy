@@ -156,7 +156,7 @@ class AbqcyCLI:
             The Python script to run after finishing the job to visualize the results. Typically, this script will plot
             a figure based on the data saved by the post-processing script.
         kwargs
-            Additional keyword arguments to pass to the ``abaqus`` command to make the object file.
+            Additional keyword arguments to pass to the ``abaqus`` command to run the job.
         """
         # Prepare the working directory
         owd = Path.cwd()
