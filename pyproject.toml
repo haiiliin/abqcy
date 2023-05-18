@@ -89,3 +89,4 @@ profile = "black"
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 addopts = "--mpl --mpl-generate-summary=html --mpl-results-path=pytest-mpl --mpl-baseline-path=baseline"
+mpl-use-full-test-name = true
