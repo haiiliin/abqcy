@@ -25,6 +25,7 @@ In order to compile the C source file into an object file (`.obj`) that can be u
 is used (it uses the MSVC `cl` compiler).
 Since the compiled `.c` file requires the Python headers and libraries, `abqcy` will try to find them automatically and
 update the `INCLUDE` and `LIB` environment variables.
+If it fails to find them, you need to update the `INCLUDE` and `LIB` environment variables manually.
 
 ## Usage
 
