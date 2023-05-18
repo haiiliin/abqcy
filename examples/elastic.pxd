@@ -16,17 +16,4 @@ cdef public void umat(
     noel: cython.p_int, npt: cython.p_int, layer: cython.p_int, kspt: cython.p_int, jstep: cython.p_int,
     kinc: cython.p_int,
 ):
-    cdef double E, nu, lam, G
-    E, nu = props[0], props[1]
-    lam = E * nu / ((1.0 + nu) * (1.0 - 2.0 * nu))
-    G = E / (2.0 * (1.0 + nu))
-
-    cdef int i, j
-    for i in range(3):
-        for j in range(3):
-            ddsdde[6 * i + j] = lam
-        ddsdde[6 * i + i] += 2.0 * G
-        ddsdde[6 * (i + 3) + (i + 3)] = G
-    for i in range(6):
-        for j in range(6):
-            stress[i] += ddsdde[6 * i + j] * dstran[j]
+    pass
