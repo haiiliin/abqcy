@@ -1,9 +1,12 @@
 from __future__ import annotations
 
+import distutils.command.build_ext
+import distutils.core
 import os
 import re
 import shutil
 from pathlib import Path
+from sysconfig import get_paths
 
 from abqpy.cli import abaqus
 from Cython.Build import cythonize
@@ -13,6 +16,42 @@ from abqcy.subs import subs
 
 class AbqcyCLI:
     """The ``abqcy`` command-line interface."""
+
+    def __init__(self):
+        """The ``abqcy`` command-line interface."""
+        self._update_include_lib()
+
+    def _update_include_lib(self):  # noqa
+        """Update the ``INCLUDE`` and ``LIB`` environment variables."""
+        # Add Python's include and platinclude paths
+        paths = get_paths()
+        INCLUDE = os.environ.get("INCLUDE", "").split(os.pathsep)
+        include, platinclude = paths["include"], paths["platinclude"]
+        INCLUDE += [include, platinclude]
+
+        # Add Python's library path https://stackoverflow.com/a/48360354/18728919
+        LIB = os.environ.get("LIB", "").split(os.pathsep)
+        b = distutils.command.build_ext.build_ext(distutils.core.Distribution())
+        b.finalize_options()
+        LIB += b.library_dirs
+
+        # Add NumPy's include and library paths
+        try:
+            import numpy as np  # noqa
+
+            numpy_include = np.get_include()
+            INCLUDE.append(numpy_include)
+            numpy_lib = str(Path(numpy_include).parent / "lib")
+            LIB.append(numpy_lib)
+        except ImportError:  # Numpy is not installed, skip
+            pass
+
+        # Remove empty strings and duplicates, then update the environment variables
+        INCLUDE, LIB = list(set(INCLUDE)), list(set(LIB))
+        INCLUDE.remove("") if "" in INCLUDE else None
+        LIB.remove("") if "" in LIB else None
+        os.environ["INCLUDE"] = os.pathsep.join(INCLUDE)
+        os.environ["LIB"] = os.pathsep.join(LIB)
 
     def compile(
         self,
@@ -75,9 +114,11 @@ class AbqcyCLI:
         kwargs
             Additional keyword arguments to pass to the ``cythonize`` function.
         """
+        compiled = Path(script).with_suffix(".c")
+        if compiled.exists():
+            os.remove(compiled)
         cythonize(script, exclude=exclude, nthreads=nthreads, aliases=aliases, quiet=quiet, force=force,
                   language=language, exclude_failures=exclude_failures, annotate=annotate, **kwargs)  # fmt: skip
-        compiled = Path(script).with_suffix(".c")
         replaced = re.sub(f"(__PYX_EXTERN_C )?void ({'|'.join(subs)})", r'extern "C" void \2', compiled.read_text())
         compiled.write_text(replaced)
         abaqus.abaqus("make", library=str(compiled))
