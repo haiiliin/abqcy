@@ -37,6 +37,7 @@ dependencies = [
 dev = [
     "black",
     "coverage",
+    "coveralls",
     "isort",
     "matplotlib",
     "numpy",
@@ -45,6 +46,7 @@ dev = [
     "pytest",
     "pytest-cov",
     "pytest-mpl",
+    "tox",
 ]
 docs = [
     "myst-parser",
