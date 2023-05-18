@@ -187,3 +187,6 @@ jobs/
 
 # temporary autoapi files
 docs/autoapi/
+
+# pytest cache
+tests/pytest-mpl/
