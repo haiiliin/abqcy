@@ -75,4 +75,4 @@ where:
   interpreter.
 - Additional flags are passed to the `abaqus` command.
 
-See {py:class}`abqcy.cli.AbqcyCLI` class for more details.
+See {py:meth}`abqcy.cli.AbqcyCLI.run` class for more details.
