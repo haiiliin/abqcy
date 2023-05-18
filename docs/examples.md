@@ -6,6 +6,17 @@ To compile the examples into an object file (`.obj`) that can be used by Abaqus,
 abqcy compile <path-to-your-subroutine>
 ```
 
+```{warning}
+It shoule be noted that temporary variables do not required to be typed in Cython excepted for integers.
+In the following examples, the `cython.infer_types` directive is used to infer types of untyped variables in function
+bodies including integers. This directive does a work similar to the `auto` keyword in C++ for the readers who are
+familiar with this language feature. It can be of great help to cut down on the need to type everything,
+but it also can lead to surprises.
+
+See [Determining where to add types](https://cython.readthedocs.io/en/stable/src/quickstart/cythonize.html#determining-where-to-add-types)
+for more information.
+```
+
 ## Example: Elastic `umat` subroutine
 
 This example shows how to write an Abaqus elastic `umat` subroutine in Cython.
