@@ -6,7 +6,7 @@ To compile the examples into an object file (`.obj`) that can be used by Abaqus,
 abqcy compile <path-to-your-subroutine>
 ```
 
-## Example 1: Elastic `umat` subroutine
+## Example: Elastic `umat` subroutine
 
 This example shows how to write an Abaqus elastic `umat` subroutine in Cython.
 
