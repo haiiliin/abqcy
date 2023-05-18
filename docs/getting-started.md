@@ -65,7 +65,7 @@ where:
 - `script-or-inp`: a Python script (`.py`) file using the `abaqus cae` command to create the input file (`.inp`) or
   an input file (`.inp`) to run.
 - `subroutine`: a Cython/Python file (`py` or `pyx`) or any other file that can be used by Abaqus as a user subroutine
-  (`.f`, `.for`, `.c`, `.cc`, `.cpp`, `.cxx`). When using a Python file, the `abqcy compile` command will be used to 
+  (`.f`, `.for`, `.c`, `.cc`, `.cpp`, `.cxx`). When using a Cython/Python file, the `abqcy compile` command will be used to 
   compile it into an object file (`.obj`) before running the job.
 - `job-name`: the name of the job to run. Defaults to the name of the input file.
 - `output-dir`: the directory to store all the output files including models, subroutines, scripts, results, etc.
