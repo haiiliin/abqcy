@@ -1,5 +1,3 @@
-
-
 cdef extern from "<aba_for_c.h>":
     pass
 
