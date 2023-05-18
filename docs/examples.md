@@ -7,7 +7,7 @@ abqcy compile <path-to-your-subroutine>
 ```
 
 ```{note}
-It shoule be noted that temporary variables do not required to be typed in Cython excepted for integers.
+It shoule be noted that temporary variables do not required to be typed in Cython except for integers.
 In the following examples, the `cython.infer_types` directive is used to infer types of untyped variables in function
 bodies including integers. This directive does a work similar to the `auto` keyword in C++ for the readers who are
 familiar with this language feature. It can be of great help to cut down on the need to type everything,
