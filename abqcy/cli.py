@@ -8,6 +8,8 @@ from pathlib import Path
 from abqpy.cli import abaqus
 from Cython.Build import cythonize
 
+from abqcy.subs import subs
+
 
 class AbqcyCLI:
     """The ``abqcy`` command-line interface."""
@@ -76,7 +78,7 @@ class AbqcyCLI:
         cythonize(script, exclude=exclude, nthreads=nthreads, aliases=aliases, quiet=quiet, force=force,
                   language=language, exclude_failures=exclude_failures, annotate=annotate, **kwargs)  # fmt: skip
         compiled = Path(script).with_suffix(".c")
-        replaced = re.sub("__PYX_EXTERN_C void ", 'extern "C" void ', compiled.read_text())
+        replaced = re.sub(f"void ({'|'.join(subs)})", r'extern "C" void \1', compiled.read_text())
         compiled.write_text(replaced)
         abaqus.abaqus("make", library=str(compiled))
 
@@ -98,7 +100,7 @@ class AbqcyCLI:
             The path to the input file.
         user : str
             The name of the user subroutine, if it is a Cython/Pure Python script, it will be compiled
-            to an object file automatically.
+            to an object file automatically. If a companion ``.pxd`` file is found, it will be copied
         job : str, optional
             The name of the job, by default the current directory name.
         output : str, optional
@@ -111,12 +113,15 @@ class AbqcyCLI:
         # Prepare the working directory
         output = Path(output or ".").resolve()
         job = job or Path(input).stem
+        user_pxd = Path(user).with_suffix(".pxd")
         if not output.exists():
             output.mkdir(parents=True)
         if not (output / Path(input).name).exists():
             shutil.copy(input, output)
         if not (output / Path(user).name).exists():
             shutil.copy(user, output)
+        if user_pxd.exists() and not (output / user_pxd.name).exists():
+            shutil.copy(user_pxd, output)
         if script and not (output / Path(script).name).exists():
             shutil.copy(script, output)
         os.chdir(output)
