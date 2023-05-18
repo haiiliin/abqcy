@@ -6,18 +6,18 @@ You can use it in the command line or in a Python script with the {py:obj}`abqcy
 
 ## References
 
-### The `abqcy` command
+### The `abqcy` command ({py:class}`abqcy.cli.AbqcyCLI`)
 
 ```{command-output} abqcy
 ```
 
-### The `abqcy compile` command
+### The `abqcy compile` command ({py:meth}`abqcy.cli.AbqcyCLI.compile`)
 
 ```{command-output} abqcy compile --help
 :returncode: 2
 ```
 
-### The `abqcy run` command
+### The `abqcy run` command ({py:meth}`abqcy.cli.AbqcyCLI.run`)
 
 ```{command-output} abqcy run --help
 :returncode: 2
