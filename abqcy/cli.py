@@ -119,26 +119,28 @@ class AbqcyCLI:
             os.remove(compiled)
         cythonize(script, exclude=exclude, nthreads=nthreads, aliases=aliases, quiet=quiet, force=force,
                   language=language, exclude_failures=exclude_failures, annotate=annotate, **kwargs)  # fmt: skip
-        replaced = re.sub(f"(__PYX_EXTERN_C )?void ({'|'.join(subs)})", r'extern "C" void \2', compiled.read_text())
-        compiled.write_text(replaced)
+        pattern = f"(__PYX_EXTERN_C )?void ({'|'.join(subs)})"
+        replaced = re.sub(pattern, r'extern "C" void \2', compiled.read_text(encoding="utf-8"))
+        compiled.write_text(replaced, encoding="utf-8")
         abaqus.abaqus("make", library=str(compiled))
 
     def run(
         self,
-        input: str,
+        model: str,
         user: str,
         *,
         job: str = None,
         output: str = None,
-        script: str = None,
+        post: str = None,
+        visualization: str = None,
         **kwargs,
     ):
         """Run Abaqus jobs.
 
         Parameters
         ----------
-        input : str
-            The path to the input file.
+        model : str
+            The path to the input file or a Python script to create the input file.
         user : str
             The name of the user subroutine, if it is a Cython/Pure Python script, it will be compiled
             to an object file automatically. If a companion ``.pxd`` file is found, it will be copied.
@@ -146,26 +148,38 @@ class AbqcyCLI:
             The name of the job, by default the current directory name.
         output : str, optional
             The path to the output directory, by default the current directory.
-        script : str, optional
-            The Python script to run after finishing the job to post-process the results.
+        post : str, optional
+            The Python script to run after finishing the job to post-process the results. In the output script, a
+            placeholder ``{odb}`` will be replaced with the path to the output database file.
+        visualization : str, optional
+            The Python script to run after finishing the job to visualize the results. Typically, this script will plot
+            a figure based on the data saved by the post-processing script.
         kwargs
             Additional keyword arguments to pass to the ``abaqus`` command to make the object file.
         """
         # Prepare the working directory
+        owd = Path.cwd()
         output = Path(output or ".").resolve()
-        job = job or Path(input).stem
+        job = job or Path(model).stem
         user_pxd = Path(user).with_suffix(".pxd")
+
+        # Create the output directory and copy the files
         if not output.exists():
             output.mkdir(parents=True)
-        if not (output / Path(input).name).exists():
-            shutil.copy(input, output)
-        if not (output / Path(user).name).exists():
-            shutil.copy(user, output)
-        if user_pxd.exists() and not (output / user_pxd.name).exists():
-            shutil.copy(user_pxd, output)
-        if script and not (output / Path(script).name).exists():
-            shutil.copy(script, output)
+        for file in (model, user, user_pxd, post, visualization):
+            if file and Path(file).exists() and not (output / Path(file).name).exists():
+                shutil.copy(file, output)
         os.chdir(output)
+
+        # Create the input file if the model is a Python script
+        if model.endswith(".py"):
+            abaqus.cae(Path(model).name, gui=False)
+            created = False
+            for file in output.glob("*.inp"):
+                model = file
+                created = True
+                break
+            assert created, f"Failed to create model from {model}."
 
         # Compile the user subroutine if it is a Cython/Pure Python script
         if user.endswith((".pyx", ".py")):
@@ -178,14 +192,28 @@ class AbqcyCLI:
             assert compiled, f"Failed to compile {user} to an object file."
 
         # Run the job
-        inp = Path(input).stem
-        user = Path(user).stem
+        inp, user = Path(model).stem, Path(user).stem
         abaqus.abaqus("", job=job, input=inp, user=user, interactive=True, **kwargs)
 
         # Run the post-processing script
-        if script:
-            script = Path(script).name
-            abaqus.cae(script, gui=False)
+        if post is not None:
+            odb = None
+            post = Path(post).name
+            for file in output.glob("*.odb"):
+                odb = file
+                break
+            assert odb, f"Failed to create the output database file from job {job}."
+            source = Path(post).read_text(encoding="utf-8").format(odb=odb.name)
+            Path(post).write_text(source, encoding="utf-8")
+            abaqus.cae(post, gui=False)
+
+        # Run the visualization script
+        if visualization is not None:
+            visualization = Path(visualization).name
+            exec(Path(visualization).read_text(encoding="utf-8"))
+
+        # Change back to the original working directory
+        os.chdir(owd)
 
 
 abqcy = AbqcyCLI()
