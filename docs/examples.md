@@ -44,4 +44,7 @@ declarations.
 :language: cython
 :linenos:
 ```
+```{note}
+This file is required to use the Cython declarations in the Python file (`.py`).
+```
 ````
