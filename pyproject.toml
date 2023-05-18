@@ -51,6 +51,7 @@ docs = [
     "sphinx-copybutton",
     "sphinx-design",
     "sphinx-hoverxref",
+    "sphinx-inline-tabs",
     "sphinx-rtd-theme",
     "sphinxcontrib-programoutput",
 ]

@@ -184,3 +184,6 @@ abqcy/_version.py
 *.sim
 *.sta
 jobs/
+
+# temporary autoapi files
+docs/autoapi/
