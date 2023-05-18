@@ -24,7 +24,7 @@ variable `ABAQUS_BAT_PATH` and set it to the path of the `abaqus.bat` file.
 In order to compile the C source file into an object file (`.obj`) that can be used by Abaqus, the `abaqus make` command
 is used (it uses the MSVC `cl`).
 Since the compiled `.c` file requires the Python headers and libraries, `abqcy` will try to find them automatically and
-set update the `INCLUDE` and `LIB` environment variables.
+update the `INCLUDE` and `LIB` environment variables.
 
 ## Usage
 
