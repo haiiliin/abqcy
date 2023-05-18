@@ -51,8 +51,10 @@ You can now write your Abaqus subroutine in Cython, simple scripts can be found 
 
 ```{note}
 In order to not mess up with the Cython declarations, you can add a companion `.pxd` file with the same name as your
-Cython `.py` or `.pyx` file, and put the Cython declarations in it. See the
-[examples](https://github.com/haiiliin/abqcy/tree/main/examples) for examples.
+Cython `.py` or `.pyx` file, and put the Cython declarations in it.
+If you are not comfortable with keeping two files, you can just use the `.pyx` file with the Cython declarations.
+
+ See the [examples](https://github.com/haiiliin/abqcy/tree/main/examples) directory for detailed examples.
 ```
 
 After you have written your subroutine, you can compile it with the `abqcy` command:
