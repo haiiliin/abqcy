@@ -4,6 +4,7 @@
 # https://www.sphinx-doc.org/en/master/usage/configuration.html
 from __future__ import annotations
 
+import importlib
 import inspect
 import os
 import sys
@@ -166,7 +167,7 @@ def linkcode_resolve(domain: str, info: dict[str, str | list[str]]):
     filename = modname.replace(".", "/")
     baseurl = f"https://github.com/haiiliin/abqcy/blob/main/{filename}.py"
 
-    submod = sys.modules.get(modname)
+    submod = importlib.import_module(modname)
     if submod is None:
         return baseurl
 
