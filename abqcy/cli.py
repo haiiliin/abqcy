@@ -78,7 +78,7 @@ class AbqcyCLI:
         cythonize(script, exclude=exclude, nthreads=nthreads, aliases=aliases, quiet=quiet, force=force,
                   language=language, exclude_failures=exclude_failures, annotate=annotate, **kwargs)  # fmt: skip
         compiled = Path(script).with_suffix(".c")
-        replaced = re.sub(f"void ({'|'.join(subs)})", r'extern "C" void \1', compiled.read_text())
+        replaced = re.sub(f"(__PYX_EXTERN_C )?void ({'|'.join(subs)})", r'extern "C" void \2', compiled.read_text())
         compiled.write_text(replaced)
         abaqus.abaqus("make", library=str(compiled))
 
