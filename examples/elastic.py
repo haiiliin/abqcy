@@ -12,12 +12,14 @@ def umat(
     lam = E * nu / ((1.0 + nu) * (1.0 - 2.0 * nu))
     G = E / (2.0 * (1.0 + nu))
 
-    ddsdde[:] = [0.0] * 36
-    for i in range(3):
-        for j in range(3):
-            ddsdde[6 * i + j] = lam
-        ddsdde[6 * i + i] += 2.0 * G
-        ddsdde[6 * (i + 3) + (i + 3)] = G
+    ddsdde[:] = [
+        lam + 2.0 * G, lam, lam, 0.0, 0.0, 0.0,
+        lam, lam + 2.0 * G, lam, 0.0, 0.0, 0.0,
+        lam, lam, lam + 2.0 * G, 0.0, 0.0, 0.0,
+        0.0, 0.0, 0.0, G, 0.0, 0.0,
+        0.0, 0.0, 0.0, 0.0, G, 0.0,
+        0.0, 0.0, 0.0, 0.0, 0.0, G,
+    ]  # fmt: skip
     for i in range(6):
         for j in range(6):
             stress[i] += ddsdde[6 * i + j] * dstran[j]
