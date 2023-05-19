@@ -19,6 +19,7 @@ cdef extern void umat(
     lam = E * nu / ((1.0 + nu) * (1.0 - 2.0 * nu))
     G = E / (2.0 * (1.0 + nu))
 
+    ddsdde[:] = [0.0] * 36
     for i in range(3):
         for j in range(3):
             ddsdde[6 * i + j] = lam
