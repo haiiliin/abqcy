@@ -9,6 +9,9 @@ import inspect
 import os
 import sys
 
+from sphinx.builders.dirhtml import DirectoryHTMLBuilder
+from sphinx.builders.html import StandaloneHTMLBuilder
+
 import abqcy
 
 # -- Project information -----------------------------------------------------
@@ -136,6 +139,13 @@ exclude_patterns = ["_build", "Thumbs.db", ".DS_Store"]
 
 html_theme = "sphinx_rtd_theme"
 html_static_path = ["_static"]
+
+DirectoryHTMLBuilder.supported_image_types = StandaloneHTMLBuilder.supported_image_types = [
+    "image/gif",
+    "image/svg+xml",
+    "image/png",
+    "image/jpeg",
+]
 
 
 # linkcode source

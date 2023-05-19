@@ -15,6 +15,7 @@ Write Abaqus Subroutines in Cython.
 :maxdepth: 1
 
 getting-started
+tutorial
 examples
 ```
 

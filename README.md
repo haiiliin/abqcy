@@ -7,3 +7,7 @@ Write Abaqus Subroutines in Cython
 - Documentation: [https://abqcy.readthedocs.io](https://abqcy.readthedocs.io)
 - Read the Docs: [https://readthedocs.org/projects/abqcy](https://readthedocs.org/projects/abqcy)
 - Bug Report: [https://github.com/haiiliin/abqcy/issues](https://github.com/haiiliin/abqcy/issues)
+
+## Screenshot
+
+![screenshot](./docs/tutorials/workflows.gif)
