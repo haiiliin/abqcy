@@ -1,7 +1,7 @@
 import cython
 
 
-@cython.infer_types(True)
+@cython.infer_types(True)  # type: ignore
 def umat(
     stress, statev, ddsdde, sse, spd, scd, rpl, ddsddt, drplde, drpldt, stran, dstran,
     time, dtime, temp, dtemp, predef, dpred, cmname, ndi, nshr, ntens, nstatv, props,

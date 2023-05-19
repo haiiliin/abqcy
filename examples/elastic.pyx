@@ -5,7 +5,7 @@ cdef extern from "<aba_for_c.h>":
     pass
 
 
-@cython.infer_types(True)
+@cython.infer_types(True)  # type: ignore
 cdef extern void umat(
     double *stress, double *statev, double *ddsdde, double *sse, double *spd,
     double *scd, double *rpl, double *ddsddt, double *drplde, double *drpldt,
