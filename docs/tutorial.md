@@ -34,7 +34,7 @@ If you are not familiar with Abaqus Python scripting, you can also use the Abaqu
 
 You can use the Python script to extract the output data from the Abaqus output database (`.odb`).
 You can also find a simple example in the [abqpy tutorials](https://abqpy.readthedocs.io/en/stable/tutorials.html#extract-output-data).
-Typically, this Python script will extract the output data from the Abaqus output database and save it into a data file。
+Typically, this Python script will extract the output data from the Abaqus output database and save it into a data file.
 
 ## 4. Visualize the results
 
