@@ -8,6 +8,7 @@ import shutil
 from pathlib import Path
 from sysconfig import get_paths
 
+import enlighten
 from abqpy.cli import abaqus
 from Cython.Build import cythonize
 
@@ -114,15 +115,29 @@ class AbqcyCLI:
         kwargs
             Additional keyword arguments to pass to the ``cythonize`` function.
         """
+        # Create a progress bar
+        manager = enlighten.get_manager()
+        pbar = manager.counter(total=4, desc="Compiling", unit="ticks", color="blue")
+        pbar.update(force=True)
+
+        # Remove the compiled C file if it exists
         compiled = Path(script).with_suffix(".c")
         if compiled.exists():
             os.remove(compiled)
+        pbar.update(force=True)
+
+        # Compile the Cython script
         cythonize(script, exclude=exclude, nthreads=nthreads, aliases=aliases, quiet=quiet, force=force,
                   language=language, exclude_failures=exclude_failures, annotate=annotate, **kwargs)  # fmt: skip
         pattern = f"(__PYX_EXTERN_C )?void ({'|'.join(subs)})"
         replaced = re.sub(pattern, r'extern "C" void \2', compiled.read_text(encoding="utf-8"))
         compiled.write_text(replaced, encoding="utf-8")
+        pbar.update(force=True)
+
+        # Compile the C script to an object file
         abaqus.abaqus("make", library=str(compiled))
+        pbar.update(force=True)
+        print(f"Successfully compiled {script} to {compiled.with_suffix('.obj')}")
 
     def run(
         self,
@@ -158,6 +173,11 @@ class AbqcyCLI:
         kwargs
             Additional keyword arguments to pass to the ``abaqus`` command to run the job.
         """
+        # Create a progress bar
+        manager = enlighten.get_manager()
+        pbar = manager.counter(total=7, desc="Running", unit="ticks", color="blue")
+        pbar.update(force=True)
+
         # Prepare the working directory
         owd = Path.cwd()
         output = Path(output or ".").resolve()
@@ -171,6 +191,7 @@ class AbqcyCLI:
             if file and Path(file).exists() and not (output / Path(file).name).exists():
                 shutil.copy(file, output)
         os.chdir(output)
+        pbar.update(force=True)
 
         # Create the input file if the model is a Python script
         if model.endswith(".py"):
@@ -181,6 +202,7 @@ class AbqcyCLI:
                 created = True
                 break
             assert created, f"Failed to create model from {model}."
+        pbar.update(force=True)
 
         # Compile the user subroutine if it is a Cython/Pure Python script
         if user and user.endswith((".pyx", ".py")):
@@ -191,10 +213,12 @@ class AbqcyCLI:
                 compiled = True
                 break
             assert compiled, f"Failed to compile {user} to an object file."
+        pbar.update(force=True)
 
         # Run the job
         inp, user = Path(model).stem, Path(user).stem if user else None
         abaqus.abaqus("", job=job, input=inp, user=user, interactive=True, **kwargs)
+        pbar.update(force=True)
 
         # Run the post-processing script
         if post is not None:
@@ -207,11 +231,16 @@ class AbqcyCLI:
             source = Path(post).read_text(encoding="utf-8").format(odb=odb.name)
             Path(post).write_text(source, encoding="utf-8")
             abaqus.cae(post, gui=False)
+        pbar.update(force=True)
 
         # Run the visualization script
         if visualization is not None:
             visualization = Path(visualization).name
             exec(Path(visualization).read_text(encoding="utf-8"))
+        pbar.update(force=True)
+        pbar.clear()
+        manager.stop()
+        print(f"Job {job} finished successfully.")
 
         # Change back to the original working directory
         os.chdir(owd)

@@ -29,6 +29,7 @@ classifiers = [
 dependencies = [
     "abqpy",
     "cython",
+    "enlighten",
     "fire",
     "python-dotenv",
 ]
