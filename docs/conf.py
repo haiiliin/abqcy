@@ -147,6 +147,10 @@ DirectoryHTMLBuilder.supported_image_types = StandaloneHTMLBuilder.supported_ima
     "image/jpeg",
 ]
 
+# -- Options for LaTeX output ------------------------------------------------
+# https://www.sphinx-doc.org/en/master/usage/configuration.html#options-for-latex-output
+latex_theme = "howto"
+
 
 # linkcode source
 def linkcode_resolve(domain: str, info: dict[str, str | list[str]]):
