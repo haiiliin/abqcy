@@ -55,8 +55,8 @@ In chronological order, the `abqcy run` command will:
 - Compile the user subroutine to an object file (`.obj`), if the `--user` option is a Cython file.
 - Run the Abaqus analysis with the `abaqus input=<inp> user=<obj>` command.
 - Run the post-processing Python script with the `abaqus cae noGUI=<script>` command.
-- Run the visualization Python script with the `python <script>` command, using the Python interpreter
-  (instead of the Abaqus command) to visualize the results.
+- Run the visualization Python script with the `python <script>` command, using the current Python interpreter
+  (the Python interpreter where `abqcy` is installed) to visualize the results.
 
 ## Example
 
