@@ -47,6 +47,15 @@ class AbqcyCLI:
         except ImportError:  # Numpy is not installed, skip
             pass
 
+        # Add eigency's include path
+        try:
+            import eigency  # noqa
+
+            eigency_includes = eigency.get_includes()
+            INCLUDE += eigency_includes
+        except ImportError:  # eigency is not installed, skip
+            pass
+
         # Remove empty strings and duplicates, then update the environment variables
         INCLUDE, LIB = list(set(INCLUDE)), list(set(LIB))
         INCLUDE.remove("") if "" in INCLUDE else None
